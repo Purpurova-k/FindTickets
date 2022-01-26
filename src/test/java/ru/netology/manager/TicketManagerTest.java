@@ -63,20 +63,4 @@ class TicketManagerTest {
 
         assertArrayEquals(expected, actual);
     }
-
-
-    @Test
-    public void shouldFindTickets() {
-        manager.add(ticketSpbMoscow2);
-        manager.add(ticketSpbMoscow3);
-        manager.add(ticketSochiSpb);
-        manager.add(ticketSpbMoscow);
-        manager.add(ticketSpbNovosibirsk);
-        manager.add(ticketStavropolRnd);
-
-        Ticket[] actual = manager.findAll("", "ROV");
-        Ticket[] expected = {ticketStavropolRnd};
-
-        assertArrayEquals(expected, actual);
-    }
 }
