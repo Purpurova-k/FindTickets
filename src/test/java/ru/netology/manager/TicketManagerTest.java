@@ -1,18 +1,15 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Ticket;
 import ru.netology.repository.TicketRepository;
-
-import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TicketManagerTest {
     private TicketRepository repository = new TicketRepository();
     private TicketManager manager = new TicketManager(repository);
-    private TicketByPriceAscComparator comparator = new TicketByPriceAscComparator();
+    private TicketByTimeFilghtAscComparator comparator = new TicketByTimeFilghtAscComparator();
 
     private Ticket ticketSpbMoscow = new Ticket(1, 2165, "LED", "DME", 95);
     private Ticket ticketSpbMoscow2 = new Ticket(2, 3165, "LED", "DME", 105);
@@ -23,7 +20,7 @@ class TicketManagerTest {
 
 
     @Test
-    public void shouldFindAllTicketsSort() {
+    public void shouldFindAllTicketsSortByPrice() {
         manager.add(ticketSpbMoscow2);
         manager.add(ticketSpbMoscow3);
         manager.add(ticketSochiSpb);
@@ -51,6 +48,7 @@ class TicketManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
 
     @Test
     public void shouldNotFindTicketsInvalidTo() {
@@ -82,4 +80,21 @@ class TicketManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+
+    @Test
+    public void shouldNotFindTicketsSortByFlightTime() {
+        manager.add(ticketSpbMoscow2);
+        manager.add(ticketSpbMoscow3);
+        manager.add(ticketSochiSpb);
+        manager.add(ticketSpbMoscow);
+        manager.add(ticketSpbNovosibirsk);
+        manager.add(ticketStavropolRnd);
+
+        Ticket[] actual = manager.findAll("STW", "DME", comparator);
+        Ticket[] expected = {};
+
+        assertArrayEquals(expected, actual);
+    }
+
 }
