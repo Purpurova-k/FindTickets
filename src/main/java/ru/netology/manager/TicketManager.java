@@ -33,7 +33,7 @@ public class TicketManager {
         Ticket[] result = new Ticket[index];
         System.arraycopy(tmp, 0, result, 0, result.length);
         Arrays.sort(result);
-        return tmp;
+        return result;
     }
 
 
@@ -49,10 +49,11 @@ public class TicketManager {
         }
 
         Ticket[] result = new Ticket[index];
-        System.arraycopy(tmp, 0, result, 0, tmp.length);
+        System.arraycopy(tmp, 0, result, 0, result.length);
         Arrays.sort(result, comparator);
         return result;
     }
+
 
 
     public Ticket findById(int id) {
